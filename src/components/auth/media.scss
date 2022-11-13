@@ -7,7 +7,7 @@ $bg-img: url('../../assets/img/background.jpg');
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    height: auto;
     background: $bg-img no-repeat center top/cover;
     padding: 30px 5px;
   }
