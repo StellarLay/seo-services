@@ -7,7 +7,7 @@ $bg-img: url('../../assets/img/background.jpg');
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: auto;
+    height: 100vh;
     background: $bg-img no-repeat center top/cover;
     padding: 30px 5px;
   }
@@ -161,6 +161,18 @@ $bg-img: url('../../assets/img/background.jpg');
   }
 
   /* Registration component END */
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .auth-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    background: $bg-img no-repeat center top/cover;
+    padding: 30px 5px;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
