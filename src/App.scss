@@ -1,0 +1,75 @@
+@use './variables' as global;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #cf3e61;
+  transition: 0.1s linear;
+}
+
+a:hover {
+  color: #b02e4c;
+}
+
+li {
+  list-style: none;
+}
+
+h1 {
+  font-size: 3em;
+  color: global.$main-color;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+input {
+  width: 100%;
+  height: 58px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  border-radius: 10px;
+  transition: 0.2s linear;
+}
+
+input[type='submit'] {
+  cursor: pointer;
+  background-color: #9d2945;
+  color: #fff;
+  font-size: 16px;
+  transition: 0.2s linear;
+  height: 55px;
+}
+
+input[type='submit']:hover {
+  background-color: #821c34;
+}
+
+input[type='submit']:active {
+  background-color: #72172c;
+  transform: scale(0.95);
+}
