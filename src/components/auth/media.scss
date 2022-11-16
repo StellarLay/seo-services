@@ -165,13 +165,7 @@ $bg-img: url('../../assets/img/background.jpg');
 
 @media (max-width: 768px) and (orientation: landscape) {
   .auth-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     height: auto;
-    background: $bg-img no-repeat center top/cover;
-    padding: 30px 5px;
   }
 }
 

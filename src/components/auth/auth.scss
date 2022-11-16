@@ -33,7 +33,6 @@ $bg-img: url('../../assets/img/background.jpg');
         font-size: 28px;
         font-weight: 600;
         letter-spacing: 1px;
-        margin-bottom: 3px;
       }
 
       .reg-section__form-subtitle {
@@ -71,6 +70,22 @@ $bg-img: url('../../assets/img/background.jpg');
         input:not(input[name='confirm-password']) {
           text-indent: 15px;
         }
+
+        .eye-icon {
+          cursor: pointer;
+          color: rgba(255, 255, 255, 0.4);
+          font-size: 1.2em;
+          transition: 0.2s linear;
+        }
+
+        .eye-icon:active {
+          color: rgba(255, 255, 255, 0.85);
+        }
+
+        .complete-icon {
+          font-size: 1.3em;
+          color: rgb(4, 160, 4);
+        }
       }
 
       .reg-section__form-inputs__input:focus-within {
@@ -78,6 +93,12 @@ $bg-img: url('../../assets/img/background.jpg');
         box-shadow: 0 0 12px -2px rgb(34 60 80 / 30%);
         transition: 0.2s linear;
       }
+    }
+
+    .error-text {
+      color: #fff;
+      font-size: 13px;
+      text-align: center;
     }
 
     .reg-section__is-account {

@@ -1,16 +1,71 @@
-import React from 'react';
+import React, { FormEventHandler, useState } from 'react';
 import './auth.scss';
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import {
+  faUser,
+  faEnvelope,
+  faEye,
+  faCircleCheck,
+} from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faVk, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
+import useHttp from '../../hooks/http.hook';
+
+// type registerFormProps = {
+//   user_name: string;
+//   user_email: string;
+//   user_password: string;
+// };
+
 const Registration = () => {
-  const handleSubmit = (e: any) => {
+  // States
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordType, setPasswordType] = useState('password');
+  const [isConfirmPassword, setIsConfirmPassword] = useState(false);
+  const [regBtnStatus, setRegBtnStatus] = useState(false);
+  const { error, request } = useHttp();
+  const [success, setSuccesss] = useState('');
+
+  // Переключаем вид пароля
+  const passwordDown = () => setPasswordType('text');
+  const passwordUp = () => setPasswordType('password');
+
+  const changePassword = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  // Ставим галочку, если подтвердили пароль
+  const changeConfirmPassword = (e: any) => {
+    if (e.target.value === password) {
+      setIsConfirmPassword(true);
+      setRegBtnStatus(true);
+    } else {
+      setIsConfirmPassword(false);
+    }
+  };
+
+  // Send FORM
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log('чпуньк');
+
+    try {
+      const url = 'https://seoservices.codeviews.ru/api/v1/registration/';
+
+      const data = await request(url, 'POST', {
+        user_name: username,
+        user_email: email,
+        user_password: password,
+      });
+
+      setSuccesss('Вы успешно зарегистрировались :)');
+    } catch (e: any) {
+      console.log(e.message);
+    }
   };
 
   return (
@@ -30,6 +85,7 @@ const Registration = () => {
               type='text'
               name='username'
               placeholder='Имя пользователя'
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className='reg-section__form-inputs__input'>
@@ -39,15 +95,24 @@ const Registration = () => {
               type='email'
               name='email'
               placeholder='E-mail'
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className='reg-section__form-inputs__input'>
             <FontAwesomeIcon icon={faLock} className='password-icon' />
             <input
               id='form-password'
-              type='password'
+              type={passwordType}
               name='password'
               placeholder='Пароль'
+              onChange={(e) => changePassword(e)}
+              value={password}
+            />
+            <FontAwesomeIcon
+              icon={faEye}
+              className='eye-icon'
+              onMouseDown={passwordDown}
+              onMouseUp={passwordUp}
             />
           </div>
           <div className='reg-section__form-inputs__input'>
@@ -56,10 +121,20 @@ const Registration = () => {
               type='password'
               name='confirm-password'
               placeholder='Подтвердите пароль'
+              onChange={(e) => changeConfirmPassword(e)}
             />
+
+            {isConfirmPassword && (
+              <FontAwesomeIcon icon={faCircleCheck} className='complete-icon' />
+            )}
           </div>
         </div>
-        <input type='submit' value='Зарегистрироваться' />
+        <span className='error-text'>{error === null ? success : error}</span>
+        <input
+          className={!regBtnStatus ? 'disabled' : ''}
+          type='submit'
+          value='Зарегистрироваться'
+        />
         <span className='reg-section__is-account'>
           Уже есть аккаунт? <a href='/'>Войти</a>
         </span>

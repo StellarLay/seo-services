@@ -56,6 +56,11 @@ input {
   transition: 0.2s linear;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
 input[type='submit'] {
   cursor: pointer;
   background-color: #9d2945;
@@ -72,4 +77,9 @@ input[type='submit']:hover {
 input[type='submit']:active {
   background-color: #72172c;
   transform: scale(0.95);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
