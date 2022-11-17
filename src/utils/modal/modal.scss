@@ -1,0 +1,40 @@
+.modal-notification {
+  display: block;
+  position: absolute;
+  left: 30px;
+  top: 35px;
+  padding: 12px 50px;
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-notification span {
+  display: inline-block;
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+.modal-notification .close-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  font-size: 20px;
+  transform: translate(-50%, -50%);
+  transition: 0.2s linear;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.modal-notification .close-icon:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-success-color {
+  background-color: rgb(12, 148, 12);
+  box-shadow: 0px 0px 10px 2px rgba(35, 212, 87, 0.3);
+}
+
+.modal-error-color {
+  background-color: rgb(149, 17, 17);
+  box-shadow: 0px 0px 10px 2px rgba(205, 27, 18, 0.3);
+}

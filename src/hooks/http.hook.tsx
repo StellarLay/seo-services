@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 const useHttp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [successText, setSuccessText] = useState('');
 
   const request = useCallback(
     async (
@@ -25,6 +26,8 @@ const useHttp = () => {
         if (data.status === 'error') {
           //throw new Error(data.message);
           setError(data.message);
+        } else {
+          setSuccessText('Вы успешно зарегистрировались!');
         }
 
         //setLoading(false);
@@ -41,7 +44,7 @@ const useHttp = () => {
 
   const clearError = useCallback(() => setError(null), []);
 
-  return { loading, request, error, clearError };
+  return { loading, request, successText, error, clearError };
 };
 
 export default useHttp;

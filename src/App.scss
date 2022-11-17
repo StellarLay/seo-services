@@ -54,6 +54,7 @@ input {
   outline: none;
   border-radius: 10px;
   transition: 0.2s linear;
+  font-size: 14px;
 }
 
 input:-webkit-autofill,
@@ -67,7 +68,7 @@ input[type='submit'] {
   color: #fff;
   font-size: 16px;
   transition: 0.2s linear;
-  height: 55px;
+  padding: 18px 0;
 }
 
 input[type='submit']:hover {

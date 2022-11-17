@@ -1,4 +1,4 @@
-import React, { FormEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import './auth.scss';
 
 // Font Awesome
@@ -13,6 +13,8 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faVk, faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 import useHttp from '../../hooks/http.hook';
+import ModalNotification from '../../utils/modal/ModalNotification';
+import { AnimatePresence } from 'framer-motion';
 
 // type registerFormProps = {
 //   user_name: string;
@@ -27,9 +29,10 @@ const Registration = () => {
   const [password, setPassword] = useState('');
   const [passwordType, setPasswordType] = useState('password');
   const [isConfirmPassword, setIsConfirmPassword] = useState(false);
+
   const [regBtnStatus, setRegBtnStatus] = useState(false);
-  const { error, request } = useHttp();
-  const [success, setSuccesss] = useState('');
+  const { successText, error, request } = useHttp();
+  const [isModal, setIsModal] = useState(false);
 
   // Переключаем вид пароля
   const passwordDown = () => setPasswordType('text');
@@ -46,7 +49,13 @@ const Registration = () => {
       setRegBtnStatus(true);
     } else {
       setIsConfirmPassword(false);
+      setRegBtnStatus(false);
     }
+  };
+
+  // Update modalStatus
+  const updateModal = (value: boolean) => {
+    setIsModal(value);
   };
 
   // Send FORM
@@ -54,15 +63,15 @@ const Registration = () => {
     e.preventDefault();
 
     try {
-      const url = 'https://seoservices.codeviews.ru/api/v1/registration/';
-
-      const data = await request(url, 'POST', {
+      // Отправляем запрос на добавление юзера
+      await request(global.createUserUrl, 'POST', {
         user_name: username,
         user_email: email,
         user_password: password,
       });
 
-      setSuccesss('Вы успешно зарегистрировались :)');
+      // Показываем уведомление
+      setIsModal(true);
     } catch (e: any) {
       console.log(e.message);
     }
@@ -129,7 +138,6 @@ const Registration = () => {
             )}
           </div>
         </div>
-        <span className='error-text'>{error === null ? success : error}</span>
         <input
           className={!regBtnStatus ? 'disabled' : ''}
           type='submit'
@@ -144,6 +152,15 @@ const Registration = () => {
           <FontAwesomeIcon icon={faTelegram} className='social-icon' />
         </div>
       </form>
+      <AnimatePresence>
+        {isModal && (
+          <ModalNotification
+            modalText={error == null ? successText : error}
+            color={error == null ? 'modal-success-color' : 'modal-error-color'}
+            updateModal={updateModal}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

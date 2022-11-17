@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './App.scss';
 import App from './App';
 
+// global variables
+global.createUserUrl = 'https://seoservices.codeviews.ru/api/v1/registration/';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
